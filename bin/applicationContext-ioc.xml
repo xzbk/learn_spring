@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- spring 入门bean配置 -->
+	<bean id="helloSpring" class="spring.ioc.induction.HelloSpring"></bean>
+	<!-- 简单工厂配置 -->
+	<bean id="simpleAnimalFactory" factory-method="createAnimal" class="spring.ioc.factory.SimpleAnimalFactory">
+	    <constructor-arg name="animalType" value="Dog"></constructor-arg>
+	</bean>
+	<!-- 抽象工厂配置 -->
+	<bean id="dogFactory" class="spring.ioc.factory.DogFactory"></bean>
+	<bean id="abstractAnimalFactory" factory-method="createAnimal" factory-bean="dogFactory"></bean>
+	<!-- ioc 依赖注入案例 -->
+	<bean id="userDao" class="spring.ioc.dao.UserDao"></bean>
+	<bean id="userAction" class="spring.ioc.action.UserAction">
+	    <!-- 注入userDao属性(setter方式注入) -->
+	    <property name="userDao" ref="userDao"></property>
+	    <!-- 构造方法注入 -->
+	    <!-- <constructor-arg name="userDao" ref="userDao"></constructor-arg> -->
+	</bean>
+</beans>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:aop="http://www.springframework.org/schema/aop"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+	<!-- 扫包 -->
+	<context:component-scan base-package="spring.aop"></context:component-scan>
+	<!-- aop配置 -->
+	<aop:config>
+	    <!-- 切面配置 -->
+	    <aop:aspect id="checkSecurity" ref="myHandler">
+	        <!-- 切入点配置 -->
+	        <aop:pointcut id="security" expression="execution(* spring.aop.aop.*.add*(..))"/>
+	        <!-- 后置通知配置 -->
+	        <aop:after method="checkSecurity" pointcut-ref="security"/>
+	    </aop:aspect>
+	</aop:config>
+</beans>
+
